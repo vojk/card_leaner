@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="{{ url_for('static', filename='js/jquery-3.6.3.min.js') }}"></script>
+
+    <style>
+        .button_back_card:hover {
+            background-color: rgba(128, 128, 128, 0.24);
+        }
+    </style>
+
+    <script>
+        var _id = ""
+
+        let id_list = []
+
+        function addIdToList(_id_) {
+            id_list.push(_id_)
+            console.log(id_list)
+        }
+    </script>
+</head>
+<body>
+{% for def in defs %}
+    <div style="background-color: white; display: none; flex-flow: column; justify-content: center; border-radius: 8px; box-shadow: 4px 4px 10px 0 rgba(0,0,0,0.27); position:relative; width: 35vw; height: 317px"
+         id="{{ def.id }}">
+        <div style="display: flex; justify-content: center">
+            <div class="front_card" style="display: flex">
+                <h2>{{ def.questions }}</h2>
+            </div>
+
+            <div class="back_card" style="display: none">
+                <h2 style="color: forestgreen">{{ def.answers }}</h2>
+            </div>
+        </div>
+
+        <div style="display: flex; justify-content: center; position:absolute; bottom: 20px; left: 50%; right: 50%" id="{{ def.id }}_button_wrapper">
+            <a style="display: flex; padding: 5px; border-radius: 100%; cursor: pointer" class="button_back_card"
+               id="{{ def.id }}_button">
+                <img src="{{ url_for('static', filename='svg/arrow-top-right.svg') }}">
+            </a>
+        </div>
+    </div>
+    <script>
+        addIdToList("{{ def.id }}")
+    </script>
+
+{% endfor %}
+
+<script>
+    $('.button_back_card').on("click", function () {
+        _id = this.id
+        _id = _id.replace("_button", "")
+        if ($('#' + _id + ' .back_card').css("display") === "none") {
+            $('#' + _id + ' .back_card').css("display", "flex")
+            $('#' + _id + ' .front_card').css("display", "none")
+            console.log("jedna")
+        } else {
+            $('#' + _id + ' .back_card').css("display", "none")
+            $('#' + _id + ' .front_card').css("display", "flex")
+            console.log("dva")
+        }
+    })
+
+    $('body').keyup(function (e) {
+        if (e.keyCode == 32) {
+            $('#'+id_list[currentCard]+'_button_wrapper .button_back_card').trigger('click')
+        }
+    })
+</script>
+
+</body>
+</html>
