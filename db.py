@@ -4,12 +4,13 @@ import os
 
 def init_db():
     database_exists = os.path.exists('./db/database.db')
+    schema_path = './db/schema.sql'
 
     if not database_exists:
+        with open(schema_path, 'r') as sql_file:
+            sql_script = sql_file.read()
         conn = sqlite3.connect('./db/database.db')
-        conn.executescript(
-            "CREATE TABLE quizes (id INTEGER PRIMARY KEY AUTOINCREMENT, sada TEXT NOT NULL, questions TEXT NOT NULL, answers TEXT NOT NULL)"
-        )
+        conn.executescript(sql_script)
         conn.execute(
             "INSERT INTO quizes (questions, answers) VALUES (?,?)", ("kolik je 2+2?", "4")
         )

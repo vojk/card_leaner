@@ -3,12 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
     <style>
         * {
-            font-family: Roboto;
+            font-family: Manrope;
             box-sizing: border-box;
         }
     </style>
+
 </head>
 <body style="background-color: #1e2025; margin: 0">
 <div style="display: flex; justify-content: center; align-items: center; flex-flow: column wrap; height: 100vh">
@@ -55,7 +60,7 @@
             console.log("Current: " + currentCard)
             console.log("Prev: " + prevCard)
 
-            currentCard = currentCard -1
+            currentCard = currentCard - 1
             prevCard = currentCard - 1
 
             $('#current_card').text(currentCard + 1)
