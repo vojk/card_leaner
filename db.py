@@ -18,9 +18,15 @@ def init_db():
         conn.close()
 
 
-def get_data_from_db():
+def get_data_from_db(sada):
     conn = sqlite3.connect('./db/database.db')
     conn.row_factory = sqlite3.Row
-    records = conn.execute("SELECT * FROM quizes").fetchall()
+    records = conn.execute("SELECT * FROM quizes WHERE card_set = ?", sada).fetchall()
     conn.close()
     return records
+
+
+def connection_for_db():
+    conn = sqlite3.connect('./db/database.db')
+    conn.row_factory = sqlite3.Row
+    return conn

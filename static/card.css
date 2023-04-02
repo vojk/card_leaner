@@ -1,0 +1,30 @@
+.card {
+    background-color: #ffff60;
+    display: none;
+    flex-flow: column;
+    justify-content: center;
+    box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.27);
+    position: relative;
+    width: 20rem;
+    height: 20rem;
+}
+
+.button_wrapper {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    right: 50%;
+}
+
+.button_back_card {
+    display: flex;
+    padding: 5px;
+    border-radius: 100%;
+    cursor: pointer
+}
+
+.button_back_card:hover {
+    background-color: rgba(128, 128, 128, 0.24);
+}

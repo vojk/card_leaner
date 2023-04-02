@@ -1,0 +1,12 @@
+<div id="inner_window">
+    {% include "card.html" %}
+
+    <div style="margin-top: 10px; display: flex; justify-content: center;">
+        <a class="nav_card_text" id="button_prev">prev</a>
+        <span class="nav_card_text" id="current_card">1</span>
+        <a class="nav_card_text" id="button_next">next</a>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/card_logic.js') }}"></script>
+</div>
+

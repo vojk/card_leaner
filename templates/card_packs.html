@@ -1,0 +1,39 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='card.css') }}">
+
+
+<div style="display: grid; grid-gap: 10px;grid-template-columns: repeat(5, 1fr);">
+    {% for def in defs %}
+        <div style="display: flex" class="card" id="card_{{ def.id }}">
+            <div style="display: flex; justify-content: center">
+                <div class="front_card"
+                     style="display: flex; flex-flow: column; height: 12rem; justify-content: space-around; width: 80%">
+                    <h2>{{ def.name }}</h2>
+                    <div style="margin: 10px 0">
+                        <h3 style="margin: 0">- Tmej Vojtěch</h3>
+                        <h4 style="margin: 0">10.2. 2023</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+
+<script>
+    $(function () {
+        $('.card').on('click', function (event) {
+            let cardId = $(this).attr('id').replace('card_', '')
+            $.ajax({
+                type: 'GET',
+                url: '/cards/' + cardId,
+                success: function (response) {
+                    $('#inner_window').remove()
+                    $('.wrap_main_cont').append(response)
+                    $('#menu_main').css('display', 'none')
+                    $('#menu_oncard').css('display', 'flex')
+                    $('.global_menu_wrap').css('width', '100%')
+                }
+            })
+        })
+    })
+</script>

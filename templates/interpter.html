@@ -7,66 +7,30 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap"
           rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='interpter.css') }}">
+    <script src="{{ url_for('static', filename='js/jquery-3.6.3.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/default_vars.js') }}"></script>
+
     <style>
         * {
             font-family: Manrope;
             box-sizing: border-box;
         }
+
+        .nav_card_text {
+            color: white;
+            margin: 0 5px;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
     </style>
 
 </head>
 <body style="background-color: #1e2025; margin: 0">
-<div style="display: flex; justify-content: center; align-items: center; flex-flow: column wrap; height: 100vh">
-    {% include "card.html" %}
-
-    <div style="margin-top: 10px; display: flex">
-        <a style="color: white; margin: 0 5px; text-transform: uppercase; cursor:pointer;" id="button_prev">prev</a>
-        <span style="color: white; margin: 0 5px; text-transform: uppercase;" id="current_card">1</span>
-        <a style="color: white; margin: 0 5px; text-transform: uppercase; cursor:pointer;" id="button_next">next</a>
-    </div>
+{% include 'menu.html' %}
+<div class="wrap_main_cont">
+    {% include 'card_overview.html' %}
 </div>
 
-
-<script>
-    let currentCard = 0
-    let prevCard = -1
-
-
-    $(document).ready(function () {
-        $('#' + id_list[currentCard]).css('display', 'flex')
-    });
-
-    $('#button_next').on("click", function () {
-        if (currentCard < id_list.length - 1) {
-            currentCard = currentCard + 1
-            prevCard = currentCard - 1
-
-            $('#' + id_list[currentCard]).css('display', 'flex')
-            $('#' + id_list[prevCard] + ' .back_card').css('display', 'none')
-            $('#' + id_list[prevCard]).css('display', 'none')
-            $('#' + id_list[currentCard] + ' .front_card').css('display', 'flex')
-
-            $('#current_card').text(currentCard + 1)
-        }
-    })
-
-    $('#button_prev').on("click", function () {
-        if (currentCard > 0) {
-            $('#' + id_list[prevCard]).css('display', 'flex')
-            $('#' + id_list[prevCard] + ' .front_card').css('display', 'flex')
-            $('#' + id_list[currentCard]).css('display', 'none')
-            $('#' + id_list[currentCard] + ' .back_card').css('display', 'none')
-
-            console.log("Current: " + currentCard)
-            console.log("Prev: " + prevCard)
-
-            currentCard = currentCard - 1
-            prevCard = currentCard - 1
-
-            $('#current_card').text(currentCard + 1)
-
-        }
-    })
-</script>
 </body>
 </html>

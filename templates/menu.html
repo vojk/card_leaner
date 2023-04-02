@@ -1,0 +1,71 @@
+<style>
+    .menu_wrap {
+        width: 100%;
+        height: 3.25rem;
+        position: fixed;
+        background: #25272d;
+        display: flex;
+        justify-content: flex-end;
+        top: 0;
+        left: 0;
+    }
+
+    .menu_items {
+        width: fit-content;
+        padding: 0 30px;
+        display: flex;
+        align-items: center;
+        color: white;
+    }
+
+    .menu_item {
+        margin: 0 10px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        color: white;
+        cursor: pointer;
+    }
+</style>
+
+<div class="menu_wrap">
+    <div class="menu_items global_menu_wrap">
+        <div class="menu_items" style="padding: 0; display: none; justify-content: space-between; width: 100%" id="menu_oncard">
+            <div class="menu_item" id="back_to_menu">
+                <img src="{{ url_for('static', filename='svg/arrow-left.svg') }}" alt="">
+                Zpět na přehled
+            </div>
+            <div class="menu_item">
+                <img src="{{ url_for('static', filename='svg/edit.svg') }}" alt="">
+                Upravit sadu
+            </div>
+        </div>
+
+        <div class="menu_items" style="padding: 0; display: flex; justify-content: flex-end;" id="menu_main">
+            <div class="menu_item" id="back_to_menu">
+                <img src="{{ url_for('static', filename='svg/plus.svg') }}" alt="">
+                Vytvořit kartu
+            </div>
+            <div class="menu_item">
+                <img src="{{ url_for('static', filename='svg/settings.svg') }}" alt="">
+                Nastavení
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#back_to_menu').on('click', function () {
+        $.ajax({
+            type: 'GET',
+            url: '/cards/overview',
+            success: function (response) {
+                $('#inner_window').remove()
+                $('.wrap_main_cont').append(response)
+                $('#menu_oncard').css('display', 'none')
+                $('#menu_main').css('display', 'flex')
+                $('.global_menu_wrap').css('width', 'fit-content')
+            }
+        })
+    })
+</script>

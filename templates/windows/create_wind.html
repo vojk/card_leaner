@@ -1,0 +1,30 @@
+<script src="{{ url_for('static', filename='js/jquery-3.6.3.min.js') }}"></script>
+
+<div>
+    <form id="cardAdd_form" method="post">
+        <input type="text" name="_name_form" id="name_form">
+        <input type="text" name="_question_form" id="question_form">
+        <input type="text" name="_answer_form" id="answer_form">
+        <button type="submit">Vložit</button>
+    </form>
+</div>
+
+<script>
+    let name_of_pack
+    let questions = []
+
+    $('#cardAdd_form').on('submit', function (event) {
+        event.preventDefault()
+        console.log($(this).serialize())
+        $.ajax({
+            type: "POST",
+            url: "/cards/add/",
+            data: $(this).serialize(),
+            success: function (response) {
+                console.log(response)
+            }
+        })
+        $('#question_form').val("")
+        $('#answer_form').val("")
+    })
+</script>
