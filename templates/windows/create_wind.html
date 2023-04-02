@@ -1,11 +1,88 @@
 <script src="{{ url_for('static', filename='js/jquery-3.6.3.min.js') }}"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap"
+      rel="stylesheet">
+<style>
+    * {
+        font-family: Manrope;
+        box-sizing: border-box;
+    }
+
+    body {
+        background-color: #1e2025;
+        margin: 0;
+    }
+
+    input[type="text"] {
+        border: none;
+        border-bottom: 1px white solid;
+        background: none;
+        color: white;
+        padding: 0.5rem 0.5rem;
+        transition: 0.25s all;
+    }
+
+    input[type="text"]:focus {
+        outline: none;
+        border-bottom: 1px #5395b9 solid;
+    }
+
+    #cardAdd_form {
+        display: flex;
+        flex-flow: column;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .button_filled {
+        background: #5395b9;
+        border: none;
+        border-radius: 4px;
+        padding: 0.5rem 1.25rem;
+        width: fit-content;
+        margin-top: 2rem;
+        transition: 0.1s;
+    }
+
+    .button_filled:hover {
+        cursor: pointer;
+        box-shadow: 0 0 20px rgba(0, 179, 255, 0.5);
+    }
+
+    .button_filled_text {
+        font-size: 1rem;
+        color: white;
+        padding: 2rem 1.25rem;
+    }
+
+    .input_wrapper {
+        display: flex;
+        flex-flow: column;
+        color: white;
+        gap: 4px;
+        width: 80%;
+    }
+</style>
+
 
 <div>
     <form id="cardAdd_form" method="post">
-        <input type="text" name="_name_form" id="name_form">
-        <input type="text" name="_question_form" id="question_form">
-        <input type="text" name="_answer_form" id="answer_form">
-        <button type="submit">Vložit</button>
+        <div class="input_wrapper">
+            <label for="name_form_insert">Název sady</label>
+            <input type="text" id="name_form_insert" placeholder="Název sady" required>
+            <input type="text" name="_name_form" id="name_form" style="display: none">
+        </div>
+        <div class="input_wrapper">
+            <label for="question_form">Otázka</label>
+            <input type="text" name="_question_form" id="question_form" placeholder="Otázka" required>
+        </div>
+        <div class="input_wrapper">
+            <label for="answer_form">Odpověď</label>
+            <input type="text" name="_answer_form" id="answer_form" placeholder="Odpověď" required>
+        </div>
+
+        <button type="submit" class="button_filled"><span class="button_filled_text">Vložit</span></button>
     </form>
 </div>
 
@@ -15,6 +92,8 @@
 
     $('#cardAdd_form').on('submit', function (event) {
         event.preventDefault()
+        $('#name_form').val($('#name_form_insert').val())
+        $('#name_form_insert').prop('disabled', true)
         console.log($(this).serialize())
         $.ajax({
             type: "POST",
